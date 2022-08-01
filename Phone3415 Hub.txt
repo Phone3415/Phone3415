@@ -35,15 +35,21 @@ TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenIn
 {CFrame = CFrame.new(-1610.7603759765625, 12.395318031311035, 162.358642578125)}):Play()
 end)
 Section:NewButton("Use Torch", "Use torch", function()
-    local TweenService = game:GetService("TweenService")
+	pcall(function ()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Torch"))
+    end)
+	local TweenService = game:GetService("TweenService")
 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0),
 {CFrame = CFrame.new(1115.382080078125, 5.264725685119629, 4348.7548828125)}):Play()
 end)
 local Section = Tab:NewSection("Cup")
-Section:NewButton("Get Cup", "Tween to get cup", function()
+Section:NewButton("Get Cup", "Tp to get cup", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1114.1256103515625, 8.425457000732422, 4365.79443359375)
 end)
 Section:NewButton("Get water", "tween to get water", function()
+pcall(function ()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Cup"))
+    end)
     local TweenService = game:GetService("TweenService")
 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(25, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0),
 {CFrame = CFrame.new(1394.2236328125, 37.69120407104492, -1322.021728515625)}):Play()
@@ -88,12 +94,28 @@ game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 
 end)
 Section:NewButton("Open", "Open Shanks room", function()
+pcall(function ()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Relic"))
+    end)
     local TweenService = game:GetService("TweenService")
 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(23, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0),
 {CFrame = CFrame.new(-1406.0870361328125, 30.19525718688965, 6.8755998611450195)}):Play()
 end)
 local Tab = Window:NewTab("Tushita")
 local Section = Tab:NewSection("Torch")
+local torch = "Holy Torch"
+Section:NewToggle("Auto Equip Torch", "", function(et)
+    EquipTorch = et
+end)
+spawn(function()
+while wait() do
+if EquipTorch then
+pcall(function()
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(torch))
+end)
+end
+end
+end)
 Section:NewButton("First", "", function()
     local TweenService = game:GetService("TweenService")
 TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,0,false,0),
