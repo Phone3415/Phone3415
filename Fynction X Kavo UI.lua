@@ -22,14 +22,11 @@ function TP(P,sp)
 end
 function stoptween()
 	pcall(function()
-		TP(CFrame.new(Character:FindFirstChild('HumanoidRootPart').Position))
+		TP(Character.HumanoidRootPart.CFrame)
 		tween:Pause()
 		_G.Fly = false
 	end)
 end
-
-local Toggles = {}
-local Options = {}
 
 local weapon = {}
 for i,v in pairs(Backpack:GetChildren()) do
@@ -41,17 +38,15 @@ for i,v in pairs(Character:GetChildren()) do
 	end
 end
 
-local lib = loadstring(game:HttpGet'https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua')()
-local win = lib.CreateLib('Fynction X','DarkTheme')
-local Tabs = {
-	aftab = win:NewTab('Auto Farm')
-}
-local afsec = Tabs.aftab:NewSection("Tawan's Request")
-Options.weapon = afsec:NewDropdown('Select Weapon',nil,weapon,function(a)
-	Options.weapon.Value = a
+local lib = loadstring(game:HttpGet "https://raw.githubusercontent.com/Phone3415/Phone3415/main/Discord-Lib")()
+local win = lib:Window('Fynction X')
+local aftab = win:Server('Auto Farm','http://www.roblox.com/asset/?id=6031075938')
+local afsec = aftab:Channel("Tawan's Request")
+Weapon = afsec:Dropdown('Select Weapon',weapon,function(a)
+	Weapon.Value = a
 end)
-Options.Rfweapon = afsec:NewButton('Refresh',nil,function()
-	Options.Rfweapon:UpdateButton('Refreshing..')
+Rfweapon = afsec:Button('Refresh',function()
+	Weapon:Clear()
 	table.clear(weapon)
 	wait()
 	for i,v in pairs(Backpack:GetChildren()) do
@@ -63,76 +58,69 @@ Options.Rfweapon = afsec:NewButton('Refresh',nil,function()
 		end
 	end
 	wait()
-	Options.weapon:Refresh(weapon)
-	Options.Rfweapon:UpdateButton('Refreshed')
-	wait()
-	Options.Rfweapon:UpdateButton('Refresh')
+	for i,v in pairs(weapon) do
+		Weapon:Add(v)
+	end
 end)
-local eliteCount = afsec:NewLabel('Elite: '..'kuy')
+local eliteCount = {}
+local eliteCount = afsec:Label('Elite: '..'kuy')
 eliteCount.Value = -1
-Toggles.afelitet = afsec:NewToggle('Auto Farm Elite 🟥',nil,function(a)
-	Toggles.afelitet.Value = a
+local afelitet = {}
+afsec:Toggle('Auto Farm Elite',false,function(a)
 	stoptween()
-	if Toggles.afelitet.Value then
-		Toggles.afelitet:UpdateToggle('Auto Farm Elite 🟩')
-	else
-		Toggles.afelitet:UpdateToggle('Auto Farm Elite 🟥')
-	end
+	afelitet.Value = a
 end)
-Toggles.FATpTushita = afsec:NewToggle('Auto Tushita Torch 🟥',nil,function(a)
-	Toggles.FATpTushita.Value = a
+local TushitaTpMode = {}
+TushitaTpMode.Value = 'Tween'
+TushitaTpMode = afsec:Dropdown('Teleport Mode',{'Tween','Teleport'},function(a)
+	TushitaTpMode.Value = a
+	stoptween()
+end)
+local FATpTushita = {}
+afsec:Toggle('Auto Tushita Torch',false,function(a)
+	FATpTushita.Value = a
+	stoptween()
 	autott = 1
-	stoptween()
-	if Toggles.FATpTushita.Value then
-		Toggles.FATpTushita:UpdateToggle('Auto Tushita Torch 🟩')
-	else
-		Toggles.FATpTushita:UpdateToggle('Auto Tushita Torch 🟥')
-	end
 end)
-Options.HazeChecker = afsec:NewDropdown('Haze Checker',nil,Options.HazeChecker.Value,function(a)
+local HazeTable = {}
+HazeChecker = afsec:Dropdown('Haze Checker',HazeTable,function(a)
 end)
-Options.HazeChecker.Value = {}
-Options.HazeChecker.Refresh = afsec:NewButton('Refresh',nil,function()
-	Options.HazeChecker.Refresh:UpdateButton('Refreshing..')
-	table.clear(Options.HazeChecker.Value)
+HazeCheckerRefresh = afsec:Button('Refresh',function()
+	HazeChecker:Clear()
+	table.clear(HazeTable)
 	local value = 0
 	wait()
 	if Player:FindFirstChild('QuestHaze') then
 		for i,v in pairs(Player.QuestHaze:GetChildren()) do
 			if v.Value > 0 then
-				table.insert(Options.HazeChecker.Value, v.Name..' | '..v.Value)
+				table.insert(HazeTable, v.Name..' | '..v.Value)
 			end
 			if v.Value == 0 then
 				value = 1
 			end
 		end
 		if value == 1 then
-			table.insert(Options.HazeChecker.Value, '    // Zero Zone //    ')
+			table.insert(HazeTable, '    // Zero Zone //    ')
 			for i,v in pairs(Player.QuestHaze:GetChildren()) do
 				if v.Value == 0 then
-					table.insert(Options.HazeChecker.Value, v.Name..' | '..v.Value)
+					table.insert(HazeTable, v.Name..' | '..v.Value)
 				end
 			end
 			wait()
 			value = 0
 		end
 	else
-		table.insert(Options.HazeChecker.Value,'No Haze, Take Quest First')
+		table.insert(HazeTable,'No Haze, Take Quest First')
 	end
 	wait()
-	Options.HazeChecker:Refresh(Options.HazeChecker.Value)
-	Options.HazeChecker.Refresh:UpdateButton('Refreshed')
-	wait()
-	Options.HazeChecker.Refresh:UpdateButton('Refresh')
+	for i,v in pairs(HazeTable) do
+		HazeChecker:Add(v)
+	end
 end)
-Toggles.AutoQuestHaze = afsec:NewToggle('Auto Quest Haze 🟥',nil,function(a)
-	Toggles.AutoQuestHaze.Value = a
+AutoQuestHaze = {}
+afsec:Toggle('Auto Quest Haze',false,function(a)
 	stoptween()
-	if Toggles.AutoQuestHaze.Value then
-		Toggles.AutoQuestHaze:UpdateToggle('Auto Quest Haze 🟩')
-	else
-		Toggles.AutoQuestHaze:UpdateToggle('Auto Quest Haze 🟥')
-	end
+	AutoQuestHaze.Value = a
 end)
 
 
@@ -306,23 +294,26 @@ local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
 CameraShakerR:Stop()
 spawn(function()
 	game:GetService("RunService").Stepped:Connect(function()
-		pcall(function()
-			CombatFrameworkR.activeController.hitboxMagnitude = 55
-			if Character:FindFirstChild("Black Leg") or Character:FindFirstChild("Electric Claws") then
-				CombatFrameworkR.activeController.timeToNextAttack = 3
-			elseif Character:FindFirstChild("Electro") or Character:FindFirstChild("Death Step") then
-				CombatFrameworkR.activeController.timeToNextAttack = 2
-			else
-				CombatFrameworkR.activeController.timeToNextAttack = 0
-			end
-			CombatFrameworkR.activeController.attacking = false
-			CombatFrameworkR.activeController.increment = 3
-			CombatFrameworkR.activeController.blocking = false
-			CombatFrameworkR.activeController.timeToNextBlock = 0
-			Character.Humanoid.Sit = false
-		end)
+		if _G.FastAtk then
+			pcall(function()
+				CombatFrameworkR.activeController.hitboxMagnitude = 55
+				if Character:FindFirstChild("Black Leg") or Character:FindFirstChild("Electric Claws") then
+					CombatFrameworkR.activeController.timeToNextAttack = 3
+				elseif Character:FindFirstChild("Electro") or Character:FindFirstChild("Death Step") then
+					CombatFrameworkR.activeController.timeToNextAttack = 2
+				else
+					CombatFrameworkR.activeController.timeToNextAttack = 0
+				end
+				CombatFrameworkR.activeController.attacking = false
+				CombatFrameworkR.activeController.increment = 3
+				CombatFrameworkR.activeController.blocking = false
+				CombatFrameworkR.activeController.timeToNextBlock = 0
+				Character.Humanoid.Sit = false
+			end)
+		end
 	end)
 end)
+_G.FastAtk = true
 spawn(function()
     game:GetService("RunService").Heartbeat:Connect(function()
         if _G.Fly then
@@ -339,10 +330,12 @@ _G.Fly = false
 spawn(function()
 	while wait() do
 		if eliteCount.Value ~= Remotes.CommF_:InvokeServer('EliteHunter','Progress') then
-			eliteCount:UpdateLabel('Elite: '..Remotes.CommF_:InvokeServer('EliteHunter','Progress'))
-			eliteCount.Value = Remotes.CommF_:InvokeServer('EliteHunter','Progress')
+			pcall(function()
+				eliteCount:SetText('Elite: '..Remotes.CommF_:InvokeServer('EliteHunter','Progress'))
+				eliteCount.Value = Remotes.CommF_:InvokeServer('EliteHunter','Progress')
+			end)
 		end
-		if Toggles.afelitet.Value then
+		if afelitet.Value then
 			pcall(function()
 				_G.Fly = true
 				if ReplicatedStorage:FindFirstChild('Deandre [Lv. 1750]') or ReplicatedStorage:FindFirstChild('Diablo [Lv. 1750]') or ReplicatedStorage:FindFirstChild('Urban [Lv. 1750]') or Enemies:FindFirstChild('Urban [Lv. 1750]') or Enemies:FindFirstChild('Deandre [Lv. 1750]') or Enemies:FindFirstChild('Diablo [Lv. 1750]') then
@@ -353,7 +346,7 @@ spawn(function()
 						if v.Humanoid.Health > 0 then
 							bring(v.Name,v.HumanoidRootPart.CFrame)
 							TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-							equip(Options.weapon.Value) buso(true)  click()
+							equip(weapon.Value) buso(true)  click()
 						end
 					end
 				end
@@ -366,7 +359,7 @@ spawn(function()
 				end
 			end)
 		end
-		if Toggles.FATpTushita.Value then
+		if FATpTushita.Value then
 			pcall(function()
 				if autott <= 5 then
 					local TTPos = game:GetService("Workspace").Map.Turtle.QuestTorches['Torch'..autott].CFrame
@@ -378,11 +371,11 @@ spawn(function()
 						autott = autott+1
 					end
 					if ttDistance >= 4 then
-						if Options.TushitaTpMode.Value == 'Tween' then
+						if TushitaTpMode.Value == 'Tween' then
 							_G.Fly = true
 							TP(TTPos)
 						end
-						if Options.TushitaTpMode.Value == 'Teleport' then
+						if TushitaTpMode.Value == 'Teleport' then
 							_G.Fly = true
 							Character.HumanoidRootPart.CFrame = TTPos
 						end
@@ -393,17 +386,17 @@ spawn(function()
 					local TTPos = CFrame.new(-10354.658203125, 331.74908447265625, -9446.5224609375)
 					local ttDistance = (TTPos.Position - Character.HumanoidRootPart.Position).Magnitude
 					if ttDistance >= 4 then
-						if Options.TushitaTpMode.Value == 'Tween' then
+						if TushitaTpMode.Value == 'Tween' then
 							TP(TTPos)
 						end
-						if Options.TushitaTpMode.Value == 'Teleport' then
+						if TushitaTpMode.Value == 'Teleport' then
 							Character.HumanoidRootPart.CFrame = TTPos
 						end
 					end
 				end
 			end)
 		end
-		if Toggles.AutoQuestHaze.Value then
+		if AutoQuestHaze.Value then
 			pcall(function()
 				if Player:FindFirstChild('QuestHaze') then
 					_G.Fly = true
@@ -412,7 +405,7 @@ spawn(function()
 						if Enemies[HazeMonName]:FindFirstChild('Humanoid').Health > 0 then
 							bring(HazeMonName,Enemies[HazeMonName].HumanoidRootPart.CFrame)
 							TP(Enemies[HazeMonName].HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-							equip(Options.weapon.Value) buso(true) click()
+							equip(weapon.Value) buso(true) click()
 						end
 					elseif HazeMonName == '' then
 						TP(HazePos)
