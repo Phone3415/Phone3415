@@ -24,7 +24,7 @@ function stoptween()
 	pcall(function()
 		TP(Character.HumanoidRootPart.CFrame)
 		tween:Pause()
-		_G.Fly = false
+		Fly = false
 	end)
 end
 
@@ -294,7 +294,7 @@ local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
 CameraShakerR:Stop()
 spawn(function()
 	game:GetService("RunService").Stepped:Connect(function()
-		if _G.FastAtk then
+		if FastAtk then
 			pcall(function()
 				CombatFrameworkR.activeController.hitboxMagnitude = 55
 				if Character:FindFirstChild("Black Leg") or Character:FindFirstChild("Electric Claws") then
@@ -313,10 +313,10 @@ spawn(function()
 		end
 	end)
 end)
-_G.FastAtk = true
+FastAtk = true
 spawn(function()
     game:GetService("RunService").Heartbeat:Connect(function()
-        if _G.Fly then
+        if Fly then
         	if Character:FindFirstChild("Humanoid") then
     	        setfflag("HumanoidParallelRemoveNoPhysics", "False")
     	        setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -325,7 +325,7 @@ spawn(function()
         end
     end)
 end)
-_G.Fly = false
+Fly = false
 
 spawn(function()
 	while wait() do
@@ -337,7 +337,7 @@ spawn(function()
 		end
 		if afelitet.Value then
 			pcall(function()
-				_G.Fly = true
+				Fly = true
 				if ReplicatedStorage:FindFirstChild('Deandre [Lv. 1750]') or ReplicatedStorage:FindFirstChild('Diablo [Lv. 1750]') or ReplicatedStorage:FindFirstChild('Urban [Lv. 1750]') or Enemies:FindFirstChild('Urban [Lv. 1750]') or Enemies:FindFirstChild('Deandre [Lv. 1750]') or Enemies:FindFirstChild('Diablo [Lv. 1750]') then
 					Remotes.CommF_:InvokeServer('EliteHunter')
 				end
@@ -365,24 +365,24 @@ spawn(function()
 					local TTPos = game:GetService("Workspace").Map.Turtle.QuestTorches['Torch'..autott].CFrame
 					local ttDistance = (TTPos.Position - Character.HumanoidRootPart.Position).Magnitude
 					if ttDistance <= 3 then
-						_G.Fly = false
+						Fly = false
 						equip('Holy Torch')
 						wait(0.2)
 						autott = autott+1
 					end
 					if ttDistance >= 4 then
 						if TushitaTpMode.Value == 'Tween' then
-							_G.Fly = true
+							Fly = true
 							TP(TTPos)
 						end
 						if TushitaTpMode.Value == 'Teleport' then
-							_G.Fly = true
+							Fly = true
 							Character.HumanoidRootPart.CFrame = TTPos
 						end
 					end
 				end
 				if autott == 6 then
-					_G.Fly = true
+					Fly = true
 					local TTPos = CFrame.new(-10354.658203125, 331.74908447265625, -9446.5224609375)
 					local ttDistance = (TTPos.Position - Character.HumanoidRootPart.Position).Magnitude
 					if ttDistance >= 4 then
@@ -399,7 +399,7 @@ spawn(function()
 		if AutoQuestHaze.Value then
 			pcall(function()
 				if Player:FindFirstChild('QuestHaze') then
-					_G.Fly = true
+					Fly = true
 					gethaze()
 					if Enemies:FindFirstChild(HazeMonName) then
 						if Enemies[HazeMonName]:FindFirstChild('Humanoid').Health > 0 then
