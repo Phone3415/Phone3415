@@ -9,7 +9,7 @@
 ### เกี่ยวกับตัวผม (About Me)
 ผมเป็นนักพัฒนาที่ชื่นชอบในการ **เขียนเว็บไซต์** และพัฒนาส่วนเสริม **Minecraft Bedrock Edition** ผมเชื่อว่า "คุณภาพสำคัญกว่าปริมาณ" ทุกโปรเจกต์ที่ผมทำอาจจะไม่บ่อย แต่แฝงไปด้วยการเรียนรู้และประสบการณ์ที่อัดแน่นเสมอครับ
 
-* **โปรเจคปัจจุบัน:** พัฒนา API ระบบ Queue สำหรับ Web-app [**QueueTemplates**](https://github.com/Phone3415/QueueTemplates)
+* **โปรเจกต์ปัจจุบัน:** พัฒนา API ระบบ Queue สำหรับ Web-app [**QueueTemplates**](https://github.com/Phone3415/QueueTemplates)
 * **การเรียนรู้:** สนใจขยายไปสาย Low-level และ Performance ด้วย **Rust, Go, และ C++**
 * **งานอดิเรก:** พัฒนา Minecraft Bedrock Add-Ons (Behavior & Resource Packs) และดูคลิปวิดีโออธิบายแนวคิดในระดับ Low-Level
 * **ติดต่อผม:** [nleisxudm@gmail.com](mailto:nleisxudm@gmail.com)
