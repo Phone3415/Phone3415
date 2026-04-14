@@ -1,9 +1,9 @@
 <h1 align="center">สวัสดีครับ ผม ณะชพล</h1>
 <h3 align="center">ชายผู้ชื่นชอบการเขียนเว็บและพัฒนา Add-On ของตัวเกม Minecraft Bedrock Edition</h3>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=phone3415&label=Profile%20views&color=0e75b6&style=flat" alt="phone3415" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=Phone3415&label=Profile%20views&color=0e75b6&style=flat" alt="Phone3415" /> </p>
 
-<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=phone3415" alt="phone3415" /></a> </p>
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=Phone3415" alt="phone3415" /></a> </p>
 
 - ปัจจุบันผมกำลังพัฒนา API ระบบ Queue สำหรับ Web-app **QueueTemplates**
 
